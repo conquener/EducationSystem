@@ -21,7 +21,7 @@
         http://www.springframework.org/schema/util/spring-util.xsd">
 
 <!-- 扫描包下内容 -->
-    <context:component-scan base-package="com.edusys.config.*"/>
+    <context:component-scan base-package="com.ritchey.edusys.*"/>
 
     <bean id="propertyConfiguer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -44,7 +44,11 @@
         <!-- 配置获取连接等待超时的时间 -->
         <property name="maxWait" value="${ds.maxWait}"/>
         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-        <property name="timeBetweenEvictionRunsMillis" value="${ds.minEvictableIdleTimeMillis}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${ds.timeBetweenEvictionRunsMillis}"/>
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${ds.minEvictableIdleTimeMillis}"/>
+
 
         <property name="validationQuery" value="SELECT 'x'"/>
         <property name="testWhileIdle" value="true"/>
@@ -59,19 +63,13 @@
         <property name="filters" value="stat"/>
     </bean>
 
-    <!-- 视图解析器 -->
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/view/"></property>
-        <property name="suffix" value=".jsp"></property>
-    </bean>
     <!-- mybatis文件配置，扫描所有mapper文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource"
           p:configLocation="classpath:mybatis-config.xml"
-          p:mapperLocations="classpath:com/edusys/app/web/dao"/>
+          p:mapperLocations="classpath:com/ritchey/edusys/web/dao/*.xml"/>
 
     <!-- spring与mybatis整合配置，扫描所有dao -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.edusys.app.web.dao"
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.ritchey.edusys.web.dao"
           p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
 
     <!-- 对dataSource 数据源进行事务管理 -->
@@ -95,7 +93,7 @@
 
     <!-- 事务 aop 配置 -->
     <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* com.edusys.app.web.service..*(..))"/>
+        <aop:pointcut id="serviceMethods" expression="execution(* com.ritchey.edusys.web.service..*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
 
