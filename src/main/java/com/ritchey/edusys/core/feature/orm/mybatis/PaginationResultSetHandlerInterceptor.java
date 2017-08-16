@@ -29,7 +29,7 @@ public class PaginationResultSetHandlerInterceptor implements Interceptor{
         RowBounds rowBounds = (RowBounds) metaStatementHandler.getValue("rowBounds");
         Object result = invocation.proceed();
         if(rowBounds instanceof Page){
-
+            metaStatementHandler.setValue("rowBounds.result", result);
         }
 
         return null;
