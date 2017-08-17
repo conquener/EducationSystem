@@ -87,6 +87,7 @@
         <mybatis.version>3.2.2</mybatis.version>
         <mybatis.spring.version>1.2.2</mybatis.spring.version>
         <mysql.connector.version>5.1.30</mysql.connector.version>
+        <sqlserver.connector.version>4.0</sqlserver.connector.version>
 
 
 
@@ -198,7 +199,7 @@
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>sqljdbc4</artifactId>
-            <version>4.0</version>
+            <version>${sqlserver.connector.version}</version>
         </dependency>
         <!-- DruidDataSource -->
         <dependency>
