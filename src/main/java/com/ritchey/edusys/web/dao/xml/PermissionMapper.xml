@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ritchey.edusys.web.dao.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.ritchey.edusys.web.model.Permission" >
+    <result column="permissionName" property="permissionname" jdbcType="NVARCHAR" />
+    <result column="permissionSign" property="permissionsign" jdbcType="NVARCHAR" />
+    <result column="permissionDesc" property="permissiondesc" jdbcType="NVARCHAR" />
+    <result column="id" property="id" jdbcType="NUMERIC" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    permissionName, permissionSign, permissionDesc, id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ritchey.edusys.web.model.PermissionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from EduSystemDatabase..t_au_Permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ritchey.edusys.web.model.PermissionExample" >
+    delete from EduSystemDatabase..t_au_Permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ritchey.edusys.web.model.Permission" >
+    insert into EduSystemDatabase..t_au_Permission (permissionName, permissionSign, 
+      permissionDesc, id)
+    values (#{permissionname,jdbcType=NVARCHAR}, #{permissionsign,jdbcType=NVARCHAR}, 
+      #{permissiondesc,jdbcType=NVARCHAR}, #{id,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ritchey.edusys.web.model.Permission" >
+    insert into EduSystemDatabase..t_au_Permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="permissionname != null" >
+        permissionName,
+      </if>
+      <if test="permissionsign != null" >
+        permissionSign,
+      </if>
+      <if test="permissiondesc != null" >
+        permissionDesc,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="permissionname != null" >
+        #{permissionname,jdbcType=NVARCHAR},
+      </if>
+      <if test="permissionsign != null" >
+        #{permissionsign,jdbcType=NVARCHAR},
+      </if>
+      <if test="permissiondesc != null" >
+        #{permissiondesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ritchey.edusys.web.model.PermissionExample" resultType="java.lang.Integer" >
+    select count(*) from EduSystemDatabase..t_au_Permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update EduSystemDatabase..t_au_Permission
+    <set >
+      <if test="record.permissionname != null" >
+        permissionName = #{record.permissionname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.permissionsign != null" >
+        permissionSign = #{record.permissionsign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.permissiondesc != null" >
+        permissionDesc = #{record.permissiondesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=NUMERIC},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update EduSystemDatabase..t_au_Permission
+    set permissionName = #{record.permissionname,jdbcType=NVARCHAR},
+      permissionSign = #{record.permissionsign,jdbcType=NVARCHAR},
+      permissionDesc = #{record.permissiondesc,jdbcType=NVARCHAR},
+      id = #{record.id,jdbcType=NUMERIC}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
