@@ -60,25 +60,32 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<!-- BEGIN LOGIN FORM -->
 	<form class="login-form" action="rest/user/login" method="post">
 		<h3 class="form-title">用户登录</h3>
-		<div class="alert alert-danger display-hide">
+		<div id="alerthint" class="alert alert-danger display-hide">
 			<button class="close" data-close="alert"></button>
 			<span>
 				 输入您的用户名和密码
 			</span>
 		</div>
+		<c:if test="${not empty error}">
+			<div  class="alert alert-error" >
+				<a class="close" data-dismiss="alert">×</a>
+				<strong style="color: red;">${error}</strong>
+			</div>
+		</c:if>
+
 		<div class="form-group">
 			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
 			<label class="control-label visible-ie8 visible-ie9">用户名</label>
 			<div class="input-icon">
 				<i class="fa fa-user"></i>
-				<input name="username" id="username" size="25" value="admin" class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" />
+				<input name="username" onBlur="userInfoChange(this)" id="username" size="25" value="admin" class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label visible-ie8 visible-ie9">密码</label>
 			<div class="input-icon">
 				<i class="fa fa-lock"></i>
-				<input name="password" id="password" size="25" value="root1234" class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" />
+				<input onBlur="userInfoChange(this)" name="password" id="password" size="25" value="root1234" class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" />
 			</div>
 		</div>
 		<div class="form-actions">
@@ -474,10 +481,21 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 		jQuery(document).ready(function() {     
-		  App.init();
-			 Login.init();
+		  	App.init();
+			Login.init();
 		});
-	</script>
+
+		function userInfoChange(input){
+			if(input.value == null || input.value ==""){
+				var div = $('#alerthint');
+				div.show();
+			}else{
+				var div = $('#alerthint');
+				div.hide();
+			}
+		}
+
+</script>
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
