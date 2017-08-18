@@ -6,6 +6,7 @@ import com.ritchey.edusys.web.model.Permission;
 import com.ritchey.edusys.web.model.Role;
 import com.ritchey.edusys.web.model.Users;
 import com.ritchey.edusys.web.service.IUserRelationService;
+import org.apache.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -29,7 +30,7 @@ import java.util.List;
 public class SecurityRealm extends AuthorizingRealm{
     @Autowired
     public IUserRelationService userRelationService;
-
+    private static final Logger log = Logger.getLogger(SecurityRealm.class);
     /**
      * 登录验证
      * @param authenticationToken
@@ -43,7 +44,9 @@ public class SecurityRealm extends AuthorizingRealm{
         // 通过数据库进行验证
         final Users authentication = userRelationService.authentication(new Users(username, password));
         if (authentication == null) {
+            log.info(username==null? username+ "登录失败!":"异常登录!");
             throw new AuthenticationException("用户名或密码错误.");
+
         }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, getName());
 
