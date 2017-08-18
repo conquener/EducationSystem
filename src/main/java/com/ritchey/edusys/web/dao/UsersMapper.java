@@ -1,11 +1,15 @@
 package com.ritchey.edusys.web.dao;
 
+import com.ritchey.edusys.core.feature.orm.mybatis.Page;
 import com.ritchey.edusys.web.model.Users;
 import com.ritchey.edusys.web.model.UsersExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UsersMapper {
+
     int countByExample(UsersExample example);
 
     int deleteByExample(UsersExample example);
@@ -27,4 +31,21 @@ public interface UsersMapper {
     int updateByPrimaryKeySelective(Users record);
 
     int updateByPrimaryKey(Users record);
+
+    /**
+     * 用户登录验证查询
+     *
+     * @param record
+     * @return
+     */
+    Users authentication(@Param("record") Users record);
+
+    /**
+     * 分页条件查询
+     *
+     * @param page
+     * @param example
+     * @return
+     */
+    List<Users> selectByExampleAndPage(Page<Users> page, UsersExample example);
 }

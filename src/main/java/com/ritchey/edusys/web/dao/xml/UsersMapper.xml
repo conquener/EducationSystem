@@ -241,4 +241,30 @@
       VALID = #{valid,jdbcType=INTEGER}
     where ID = #{id,jdbcType=NUMERIC}
   </update>
+
+
+  <!-- 用户登录验证查询 -->
+  <select id="authentication" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where username = #{record.username,jdbcType=VARCHAR} and password = #{record.password,jdbcType=CHAR}
+  </select>
+
+  <!-- 分页条件查询 -->
+  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.eliteams.quick4j.web.model.UserExample">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
 </mapper>
