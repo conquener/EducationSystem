@@ -2,13 +2,16 @@ package com.ritchey.edusys.web.service.impl;
 
 import com.ritchey.edusys.core.generic.GenericDao;
 import com.ritchey.edusys.core.generic.GenericServiceImpl;
+import com.ritchey.edusys.web.dao.UsersMapper;
 import com.ritchey.edusys.web.model.Group;
 import com.ritchey.edusys.web.model.Permission;
 import com.ritchey.edusys.web.model.Role;
 import com.ritchey.edusys.web.model.Users;
 import com.ritchey.edusys.web.service.IUserRelationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,7 +19,8 @@ import java.util.List;
  */
 @Service
 public class UserRelationServiceImpl implements  IUserRelationService{
-
+    @Autowired
+    private UsersMapper userMapper;
 
     @Override
     public List<Group> selectGroupByUserId(Long userId) {
@@ -42,6 +46,6 @@ public class UserRelationServiceImpl implements  IUserRelationService{
     @Override
     public Users authentication(Users user) {
 
-        return null;
+        return userMapper.authentication(user);
     }
 }

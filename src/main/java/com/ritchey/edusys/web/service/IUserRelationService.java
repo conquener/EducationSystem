@@ -41,5 +41,6 @@ public interface IUserRelationService {
      */
     public List<Permission> selectPermissionsByRoleAndGroup(List<Long> roleIds,List<Long> groupIds);
 
+
     public Users authentication(Users user);
 }
