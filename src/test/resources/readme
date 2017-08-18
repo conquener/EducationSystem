@@ -1,0 +1,2 @@
+generatorConfig 是mybatis 自动生成table 的工具
+通过 maven 执行 plugin  : mybatis-generator  即可

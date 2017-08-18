@@ -39,8 +39,9 @@
             <property name="enableSubPackages" value="ture"/>
         </javaClientGenerator>
 
-        <!--对应数据库表名 -->
-
+        <!--对应数据库表名,如需要执行  ,请注释tableName =""  -->
+        <table tableName=""/>
+        <!--
          <table tableName="T_AU_USER" domainObjectName="Users"
                  enableCountByExample="true" enableUpdateByExample="true"
                  enableDeleteByExample="true" enableSelectByExample="true"
@@ -85,10 +86,10 @@
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"  catalog="EduSystemDatabase">
 
-        </table>
+        </table>-->
 
 
-        <!--<table tableName=""/>-->
+
 
 
 
