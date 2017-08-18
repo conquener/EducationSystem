@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ritchey.edusys.web.dao.PermissionMapper" >
-  <resultMap id="BaseResultMap" type="com.ritchey.edusys.web.model.Permission" >
-    <result column="PERMISSION_NAME" property="permissionName" jdbcType="NVARCHAR" />
-    <result column="PERMISSION_SIGN" property="permissionSign" jdbcType="NVARCHAR" />
-    <result column="PERMISSION_DESC" property="permissionDesc" jdbcType="NVARCHAR" />
-    <result column="ID" property="id" jdbcType="NUMERIC" />
+<mapper namespace="com.ritchey.edusys.web.dao.UserRoleRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.ritchey.edusys.web.model.UserRoleRelation" >
+    <id column="ID" property="id" jdbcType="NUMERIC" />
+    <result column="USERID" property="userid" jdbcType="NUMERIC" />
+    <result column="ROLEID" property="roleid" jdbcType="NUMERIC" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,16 +65,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    PERMISSION_NAME, PERMISSION_SIGN, PERMISSION_DESC, ID
+    ID, USERID, ROLEID
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ritchey.edusys.web.model.PermissionExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ritchey.edusys.web.model.UserRoleRelationExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from EduSystemDatabase..T_AU_PERMISSION
+    from EduSystemDatabase..T_AU_USER_ROLE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,69 +82,70 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.ritchey.edusys.web.model.PermissionExample" >
-    delete from EduSystemDatabase..T_AU_PERMISSION
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from EduSystemDatabase..T_AU_USER_ROLE
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from EduSystemDatabase..T_AU_USER_ROLE
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ritchey.edusys.web.model.UserRoleRelationExample" >
+    delete from EduSystemDatabase..T_AU_USER_ROLE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ritchey.edusys.web.model.Permission" >
-    insert into EduSystemDatabase..T_AU_PERMISSION (PERMISSION_NAME, PERMISSION_SIGN, 
-      PERMISSION_DESC, ID)
-    values (#{permissionName,jdbcType=NVARCHAR}, #{permissionSign,jdbcType=NVARCHAR}, 
-      #{permissionDesc,jdbcType=NVARCHAR}, #{id,jdbcType=NUMERIC})
+  <insert id="insert" parameterType="com.ritchey.edusys.web.model.UserRoleRelation" >
+    insert into EduSystemDatabase..T_AU_USER_ROLE (ID, USERID, ROLEID
+      )
+    values (#{id,jdbcType=NUMERIC}, #{userid,jdbcType=NUMERIC}, #{roleid,jdbcType=NUMERIC}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.ritchey.edusys.web.model.Permission" >
-    insert into EduSystemDatabase..T_AU_PERMISSION
+  <insert id="insertSelective" parameterType="com.ritchey.edusys.web.model.UserRoleRelation" >
+    insert into EduSystemDatabase..T_AU_USER_ROLE
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="permissionName != null" >
-        PERMISSION_NAME,
-      </if>
-      <if test="permissionSign != null" >
-        PERMISSION_SIGN,
-      </if>
-      <if test="permissionDesc != null" >
-        PERMISSION_DESC,
-      </if>
       <if test="id != null" >
         ID,
       </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="roleid != null" >
+        ROLEID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="permissionName != null" >
-        #{permissionName,jdbcType=NVARCHAR},
-      </if>
-      <if test="permissionSign != null" >
-        #{permissionSign,jdbcType=NVARCHAR},
-      </if>
-      <if test="permissionDesc != null" >
-        #{permissionDesc,jdbcType=NVARCHAR},
-      </if>
       <if test="id != null" >
         #{id,jdbcType=NUMERIC},
       </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=NUMERIC},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=NUMERIC},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ritchey.edusys.web.model.PermissionExample" resultType="java.lang.Integer" >
-    select count(*) from EduSystemDatabase..T_AU_PERMISSION
+  <select id="countByExample" parameterType="com.ritchey.edusys.web.model.UserRoleRelationExample" resultType="java.lang.Integer" >
+    select count(*) from EduSystemDatabase..T_AU_USER_ROLE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update EduSystemDatabase..T_AU_PERMISSION
+    update EduSystemDatabase..T_AU_USER_ROLE
     <set >
-      <if test="record.permissionName != null" >
-        PERMISSION_NAME = #{record.permissionName,jdbcType=NVARCHAR},
-      </if>
-      <if test="record.permissionSign != null" >
-        PERMISSION_SIGN = #{record.permissionSign,jdbcType=NVARCHAR},
-      </if>
-      <if test="record.permissionDesc != null" >
-        PERMISSION_DESC = #{record.permissionDesc,jdbcType=NVARCHAR},
-      </if>
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=NUMERIC},
+      </if>
+      <if test="record.userid != null" >
+        USERID = #{record.userid,jdbcType=NUMERIC},
+      </if>
+      <if test="record.roleid != null" >
+        ROLEID = #{record.roleid,jdbcType=NUMERIC},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -153,13 +153,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update EduSystemDatabase..T_AU_PERMISSION
-    set PERMISSION_NAME = #{record.permissionName,jdbcType=NVARCHAR},
-      PERMISSION_SIGN = #{record.permissionSign,jdbcType=NVARCHAR},
-      PERMISSION_DESC = #{record.permissionDesc,jdbcType=NVARCHAR},
-      ID = #{record.id,jdbcType=NUMERIC}
+    update EduSystemDatabase..T_AU_USER_ROLE
+    set ID = #{record.id,jdbcType=NUMERIC},
+      USERID = #{record.userid,jdbcType=NUMERIC},
+      ROLEID = #{record.roleid,jdbcType=NUMERIC}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ritchey.edusys.web.model.UserRoleRelation" >
+    update EduSystemDatabase..T_AU_USER_ROLE
+    <set >
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=NUMERIC},
+      </if>
+      <if test="roleid != null" >
+        ROLEID = #{roleid,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ritchey.edusys.web.model.UserRoleRelation" >
+    update EduSystemDatabase..T_AU_USER_ROLE
+    set USERID = #{userid,jdbcType=NUMERIC},
+      ROLEID = #{roleid,jdbcType=NUMERIC}
+    where ID = #{id,jdbcType=NUMERIC}
   </update>
 </mapper>

@@ -1,36 +1,36 @@
 package com.ritchey.edusys.web.model;
 
 public class Permission {
-    private String permissionname;
+    private String permissionName;
 
-    private String permissionsign;
+    private String permissionSign;
 
-    private String permissiondesc;
+    private String permissionDesc;
 
     private Long id;
 
-    public String getPermissionname() {
-        return permissionname;
+    public String getPermissionName() {
+        return permissionName;
     }
 
-    public void setPermissionname(String permissionname) {
-        this.permissionname = permissionname == null ? null : permissionname.trim();
+    public void setPermissionName(String permissionName) {
+        this.permissionName = permissionName == null ? null : permissionName.trim();
     }
 
-    public String getPermissionsign() {
-        return permissionsign;
+    public String getPermissionSign() {
+        return permissionSign;
     }
 
-    public void setPermissionsign(String permissionsign) {
-        this.permissionsign = permissionsign == null ? null : permissionsign.trim();
+    public void setPermissionSign(String permissionSign) {
+        this.permissionSign = permissionSign == null ? null : permissionSign.trim();
     }
 
-    public String getPermissiondesc() {
-        return permissiondesc;
+    public String getPermissionDesc() {
+        return permissionDesc;
     }
 
-    public void setPermissiondesc(String permissiondesc) {
-        this.permissiondesc = permissiondesc == null ? null : permissiondesc.trim();
+    public void setPermissionDesc(String permissionDesc) {
+        this.permissionDesc = permissionDesc == null ? null : permissionDesc.trim();
     }
 
     public Long getId() {

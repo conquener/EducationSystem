@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ritchey.edusys.web.dao.RoleMapper" >
-  <resultMap id="BaseResultMap" type="com.ritchey.edusys.web.model.Role" >
+<mapper namespace="com.ritchey.edusys.web.dao.GroupMapper" >
+  <resultMap id="BaseResultMap" type="com.ritchey.edusys.web.model.Group" >
     <id column="ID" property="id" jdbcType="NUMERIC" />
-    <result column="ROLE_NAME" property="roleName" jdbcType="NVARCHAR" />
-    <result column="ROLE_DESC" property="roleDesc" jdbcType="NVARCHAR" />
-    <result column="ROLE_SIGN" property="roleSign" jdbcType="NVARCHAR" />
-    <result column="VALID" property="valid" jdbcType="INTEGER" />
+    <result column="GROUP_NAME" property="groupName" jdbcType="NVARCHAR" />
+    <result column="GROUP_CODE" property="groupCode" jdbcType="NVARCHAR" />
+    <result column="GROUP_TYPE" property="groupType" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,16 +66,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, ROLE_NAME, ROLE_DESC, ROLE_SIGN, VALID
+    ID, GROUP_NAME, GROUP_CODE, GROUP_TYPE
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ritchey.edusys.web.model.RoleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ritchey.edusys.web.model.GroupExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from EduSystemDatabase..T_AU_ROLE
+    from EduSystemDatabase..T_AU_GROUP
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,85 +86,76 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from EduSystemDatabase..T_AU_ROLE
+    from EduSystemDatabase..T_AU_GROUP
     where ID = #{id,jdbcType=NUMERIC}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from EduSystemDatabase..T_AU_ROLE
+    delete from EduSystemDatabase..T_AU_GROUP
     where ID = #{id,jdbcType=NUMERIC}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ritchey.edusys.web.model.RoleExample" >
-    delete from EduSystemDatabase..T_AU_ROLE
+  <delete id="deleteByExample" parameterType="com.ritchey.edusys.web.model.GroupExample" >
+    delete from EduSystemDatabase..T_AU_GROUP
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ritchey.edusys.web.model.Role" >
-    insert into EduSystemDatabase..T_AU_ROLE (ID, ROLE_NAME, ROLE_DESC, 
-      ROLE_SIGN, VALID)
-    values (#{id,jdbcType=NUMERIC}, #{roleName,jdbcType=NVARCHAR}, #{roleDesc,jdbcType=NVARCHAR}, 
-      #{roleSign,jdbcType=NVARCHAR}, #{valid,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.ritchey.edusys.web.model.Group" >
+    insert into EduSystemDatabase..T_AU_GROUP (ID, GROUP_NAME, GROUP_CODE, 
+      GROUP_TYPE)
+    values (#{id,jdbcType=NUMERIC}, #{groupName,jdbcType=NVARCHAR}, #{groupCode,jdbcType=NVARCHAR}, 
+      #{groupType,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ritchey.edusys.web.model.Role" >
-    insert into EduSystemDatabase..T_AU_ROLE
+  <insert id="insertSelective" parameterType="com.ritchey.edusys.web.model.Group" >
+    insert into EduSystemDatabase..T_AU_GROUP
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         ID,
       </if>
-      <if test="roleName != null" >
-        ROLE_NAME,
+      <if test="groupName != null" >
+        GROUP_NAME,
       </if>
-      <if test="roleDesc != null" >
-        ROLE_DESC,
+      <if test="groupCode != null" >
+        GROUP_CODE,
       </if>
-      <if test="roleSign != null" >
-        ROLE_SIGN,
-      </if>
-      <if test="valid != null" >
-        VALID,
+      <if test="groupType != null" >
+        GROUP_TYPE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=NUMERIC},
       </if>
-      <if test="roleName != null" >
-        #{roleName,jdbcType=NVARCHAR},
+      <if test="groupName != null" >
+        #{groupName,jdbcType=NVARCHAR},
       </if>
-      <if test="roleDesc != null" >
-        #{roleDesc,jdbcType=NVARCHAR},
+      <if test="groupCode != null" >
+        #{groupCode,jdbcType=NVARCHAR},
       </if>
-      <if test="roleSign != null" >
-        #{roleSign,jdbcType=NVARCHAR},
-      </if>
-      <if test="valid != null" >
-        #{valid,jdbcType=INTEGER},
+      <if test="groupType != null" >
+        #{groupType,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ritchey.edusys.web.model.RoleExample" resultType="java.lang.Integer" >
-    select count(*) from EduSystemDatabase..T_AU_ROLE
+  <select id="countByExample" parameterType="com.ritchey.edusys.web.model.GroupExample" resultType="java.lang.Integer" >
+    select count(*) from EduSystemDatabase..T_AU_GROUP
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update EduSystemDatabase..T_AU_ROLE
+    update EduSystemDatabase..T_AU_GROUP
     <set >
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=NUMERIC},
       </if>
-      <if test="record.roleName != null" >
-        ROLE_NAME = #{record.roleName,jdbcType=NVARCHAR},
+      <if test="record.groupName != null" >
+        GROUP_NAME = #{record.groupName,jdbcType=NVARCHAR},
       </if>
-      <if test="record.roleDesc != null" >
-        ROLE_DESC = #{record.roleDesc,jdbcType=NVARCHAR},
+      <if test="record.groupCode != null" >
+        GROUP_CODE = #{record.groupCode,jdbcType=NVARCHAR},
       </if>
-      <if test="record.roleSign != null" >
-        ROLE_SIGN = #{record.roleSign,jdbcType=NVARCHAR},
-      </if>
-      <if test="record.valid != null" >
-        VALID = #{record.valid,jdbcType=INTEGER},
+      <if test="record.groupType != null" >
+        GROUP_TYPE = #{record.groupType,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -173,40 +163,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update EduSystemDatabase..T_AU_ROLE
+    update EduSystemDatabase..T_AU_GROUP
     set ID = #{record.id,jdbcType=NUMERIC},
-      ROLE_NAME = #{record.roleName,jdbcType=NVARCHAR},
-      ROLE_DESC = #{record.roleDesc,jdbcType=NVARCHAR},
-      ROLE_SIGN = #{record.roleSign,jdbcType=NVARCHAR},
-      VALID = #{record.valid,jdbcType=INTEGER}
+      GROUP_NAME = #{record.groupName,jdbcType=NVARCHAR},
+      GROUP_CODE = #{record.groupCode,jdbcType=NVARCHAR},
+      GROUP_TYPE = #{record.groupType,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ritchey.edusys.web.model.Role" >
-    update EduSystemDatabase..T_AU_ROLE
+  <update id="updateByPrimaryKeySelective" parameterType="com.ritchey.edusys.web.model.Group" >
+    update EduSystemDatabase..T_AU_GROUP
     <set >
-      <if test="roleName != null" >
-        ROLE_NAME = #{roleName,jdbcType=NVARCHAR},
+      <if test="groupName != null" >
+        GROUP_NAME = #{groupName,jdbcType=NVARCHAR},
       </if>
-      <if test="roleDesc != null" >
-        ROLE_DESC = #{roleDesc,jdbcType=NVARCHAR},
+      <if test="groupCode != null" >
+        GROUP_CODE = #{groupCode,jdbcType=NVARCHAR},
       </if>
-      <if test="roleSign != null" >
-        ROLE_SIGN = #{roleSign,jdbcType=NVARCHAR},
-      </if>
-      <if test="valid != null" >
-        VALID = #{valid,jdbcType=INTEGER},
+      <if test="groupType != null" >
+        GROUP_TYPE = #{groupType,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{id,jdbcType=NUMERIC}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ritchey.edusys.web.model.Role" >
-    update EduSystemDatabase..T_AU_ROLE
-    set ROLE_NAME = #{roleName,jdbcType=NVARCHAR},
-      ROLE_DESC = #{roleDesc,jdbcType=NVARCHAR},
-      ROLE_SIGN = #{roleSign,jdbcType=NVARCHAR},
-      VALID = #{valid,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.ritchey.edusys.web.model.Group" >
+    update EduSystemDatabase..T_AU_GROUP
+    set GROUP_NAME = #{groupName,jdbcType=NVARCHAR},
+      GROUP_CODE = #{groupCode,jdbcType=NVARCHAR},
+      GROUP_TYPE = #{groupType,jdbcType=INTEGER}
     where ID = #{id,jdbcType=NUMERIC}
   </update>
 </mapper>

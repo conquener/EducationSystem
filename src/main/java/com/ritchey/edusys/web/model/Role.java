@@ -1,17 +1,15 @@
 package com.ritchey.edusys.web.model;
 
-import java.math.BigDecimal;
-
 public class Role {
     private Long id;
 
-    private String rolename;
+    private String roleName;
 
-    private String desc;
+    private String roleDesc;
 
-    private String rolesign;
+    private String roleSign;
 
-    private Byte valid;
+    private Integer valid;
 
     public Long getId() {
         return id;
@@ -21,35 +19,35 @@ public class Role {
         this.id = id;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename == null ? null : rolename.trim();
+    public void setRoleName(String roleName) {
+        this.roleName = roleName == null ? null : roleName.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getRoleDesc() {
+        return roleDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setRoleDesc(String roleDesc) {
+        this.roleDesc = roleDesc == null ? null : roleDesc.trim();
     }
 
-    public String getRolesign() {
-        return rolesign;
+    public String getRoleSign() {
+        return roleSign;
     }
 
-    public void setRolesign(String rolesign) {
-        this.rolesign = rolesign == null ? null : rolesign.trim();
+    public void setRoleSign(String roleSign) {
+        this.roleSign = roleSign == null ? null : roleSign.trim();
     }
 
-    public Byte getValid() {
+    public Integer getValid() {
         return valid;
     }
 
-    public void setValid(Byte valid) {
+    public void setValid(Integer valid) {
         this.valid = valid;
     }
 }

@@ -2,7 +2,6 @@ package com.ritchey.edusys.web.dao;
 
 import com.ritchey.edusys.web.model.Role;
 import com.ritchey.edusys.web.model.RoleExample;
-import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +10,7 @@ public interface RoleMapper {
 
     int deleteByExample(RoleExample example);
 
-    int deleteByPrimaryKey(BigDecimal id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Role record);
 
@@ -19,7 +18,7 @@ public interface RoleMapper {
 
     List<Role> selectByExample(RoleExample example);
 
-    Role selectByPrimaryKey(BigDecimal id);
+    Role selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Role record, @Param("example") RoleExample example);
 
