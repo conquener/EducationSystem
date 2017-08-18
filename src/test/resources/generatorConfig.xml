@@ -41,27 +41,54 @@
 
         <!--对应数据库表名 -->
 
-         <!--  <table tableName="t_au_role" domainObjectName="Users"
+         <table tableName="T_AU_USER" domainObjectName="Users"
                  enableCountByExample="true" enableUpdateByExample="true"
                  enableDeleteByExample="true" enableSelectByExample="true"
                  selectByExampleQueryId="true"  catalog="EduSystemDatabase">
 
           </table>
-          <table tableName="t_au_role" domainObjectName="Role"
+          <table tableName="T_AU_ROLE" domainObjectName="Role"
                  enableCountByExample="true" enableUpdateByExample="true"
                  enableDeleteByExample="true" enableSelectByExample="true"
                  selectByExampleQueryId="true"  catalog="EduSystemDatabase">
 
           </table>
-                  <table tableName="t_au_Permission" domainObjectName="Permission"
+          <table tableName="T_AU_PERMISSION" domainObjectName="Permission"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  catalog="EduSystemDatabase">
+
+          </table>
+
+        <table tableName="T_AU_GROUP" domainObjectName="Group"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"  catalog="EduSystemDatabase">
 
         </table>
 
-          -->
-        <table tableName=""/>
+        <table tableName="T_AU_USER_ROLE" domainObjectName="UserRoleRelation"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  catalog="EduSystemDatabase">
+
+        </table>
+
+        <table tableName="T_AU_USER_GROUP" domainObjectName="UserGroupRelation"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  catalog="EduSystemDatabase">
+
+        </table>
+        <table tableName="T_AU_ROLE_GROUP_PERMISSION" domainObjectName="GroupRoleRelationPermission"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"  catalog="EduSystemDatabase">
+
+        </table>
+
+
+        <!--<table tableName=""/>-->
 
 
 
