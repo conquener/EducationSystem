@@ -78,14 +78,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			<label class="control-label visible-ie8 visible-ie9">用户名</label>
 			<div class="input-icon">
 				<i class="fa fa-user"></i>
-				<input name="username" onBlur="userInfoChange(this)" id="username" size="25" value="admin" class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" />
+				<input name="userName" onBlur="userInfoChange(this)" id="userName" size="25" value="admin" class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label visible-ie8 visible-ie9">密码</label>
 			<div class="input-icon">
 				<i class="fa fa-lock"></i>
-				<input onBlur="userInfoChange(this)" name="password" id="password" size="25" value="root1234" class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" />
+				<input onBlur="userInfoChange(this)" name="userPwd" id="userPwd" size="25" value="root1234" class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" />
 			</div>
 		</div>
 		<div class="form-actions">
