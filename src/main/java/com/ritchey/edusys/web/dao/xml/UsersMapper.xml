@@ -248,11 +248,11 @@
     select
     <include refid="Base_Column_List" />
     from user
-    where username = #{record.username,jdbcType=VARCHAR} and password = #{record.password,jdbcType=CHAR}
+    where user_name = #{record.userName,jdbcType=VARCHAR} and user_pwd = #{record.userPwd,jdbcType=CHAR}
   </select>
 
   <!-- 分页条件查询 -->
-  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.eliteams.quick4j.web.model.UserExample">
+  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.ritchey.edusys.web.model.Users">
     select
     <if test="distinct">
       distinct
