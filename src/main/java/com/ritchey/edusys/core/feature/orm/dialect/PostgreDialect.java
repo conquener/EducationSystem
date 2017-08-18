@@ -2,8 +2,6 @@ package com.ritchey.edusys.core.feature.orm.dialect;
 
 /**
  * Postgre 数据库 方言
- * 
- * @since 2014年7月2日 上午10:30:24
  **/
 public class PostgreDialect extends Dialect {
 

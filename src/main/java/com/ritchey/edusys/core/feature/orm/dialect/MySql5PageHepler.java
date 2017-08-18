@@ -3,10 +3,6 @@ package com.ritchey.edusys.core.feature.orm.dialect;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author StarZou
- * @since 2014年5月18日 下午1:33:01
- **/
 public class MySql5PageHepler {
     /**
      * 得到查询总数的sql

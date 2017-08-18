@@ -2,9 +2,6 @@ package com.ritchey.edusys.core.feature.orm.dialect;
 
 /**
  * MySQL数据库方言
- * 
- * @author StarZou
- * @since 2014年5月18日 下午1:32:52
  **/
 public class MySql5Dialect extends Dialect {
 

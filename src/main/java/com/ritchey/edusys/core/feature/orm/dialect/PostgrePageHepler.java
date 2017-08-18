@@ -3,9 +3,6 @@ package com.ritchey.edusys.core.feature.orm.dialect;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
-@since 2014年7月2日 上午10:30:14
-**/
 public class PostgrePageHepler {
     /**
      * 得到查询总数的sql
