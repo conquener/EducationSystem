@@ -89,6 +89,19 @@
     from EduSystemDatabase..T_AU_GROUP
     where ID = #{id,jdbcType=NUMERIC}
   </select>
+
+  <select id="selectGroupByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM EduSystemDatabase..T_AU_GROUP
+    WHERE ID IN
+    (SELECT GROUP_ID FROM T_AU_USER_GROUP WHERE USER_ID = #{userId,jdbcType = NUMERIC} )
+
+  </select>
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from EduSystemDatabase..T_AU_GROUP
     where ID = #{id,jdbcType=NUMERIC}

@@ -16,7 +16,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     <head>
         <base href="<%=basePath%>">
         <meta charset="utf-8" />
-        <title>Quick4j</title>
+        <title>Education System</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <meta content="" name="description" />
@@ -65,7 +65,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                     <li class="dropdown user">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <img alt="" src="assets/img/avatar1_small.jpg"/>
-                            <span class="username"> ${userInfo.username } </span>
+                            <span class="username"> ${userInfo.userName } </span>
                             <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
@@ -154,25 +154,24 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                         密码修改
                                     </a>
                                 </li>
-                                
-                                <!-- 测试权限控制 -->
-                                <shiro:hasAnyRoles name="super_admin">
+                                <!--test shiro controll -->
+                                <shiro:hasAnyRoles name="Super_User">
                                     <li>
-                                        <a href="javascript:;">super_admin 拥有此角色</a>
+                                        <a href="javascript:;">super_admin Role</a>
                                     </li>
                                 </shiro:hasAnyRoles>
                                 
                                 <shiro:hasPermission name="user:create">
                                     <li>
-                                        <a href="javascript:;">user:create 拥有此权限</a>
+                                        <a href="javascript:;">user:create Role</a>
                                     </li>
                                 </shiro:hasPermission>
                                 
                                 <shiro:hasPermission name="user:update">
                                     <li>
-                                        <a href="javascript:;">user:update 拥有此权限</a>
+                                        <a href="javascript:;">user:update Role</a>
                                     </li>
-                                </shiro:hasPermission>
+                                </shiro:hasPermission>--%>
      
                             </ul>
                         </li>
@@ -302,7 +301,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <!-- BEGIN FOOTER -->
         <div class="footer">
             <div class="footer-inner">
-                2014 &copy; Quick4j By Eliteams.
+                2017&copy; Education System.
             </div>
             <div class="footer-tools">
                 <span class="go-top"><i class="fa fa-angle-up"></i></span>

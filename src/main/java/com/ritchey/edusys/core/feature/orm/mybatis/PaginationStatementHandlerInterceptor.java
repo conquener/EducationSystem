@@ -3,6 +3,7 @@ package com.ritchey.edusys.core.feature.orm.mybatis;
 import com.ritchey.edusys.core.feature.orm.dialect.Dialect;
 import com.ritchey.edusys.core.feature.orm.dialect.DialectFactory;
 import org.apache.ibatis.executor.parameter.ParameterHandler;
+import org.apache.ibatis.executor.resultset.ResultSetHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.*;
@@ -20,12 +21,13 @@ import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Properties;
 
 /**
  * Created by Administrator on 2017/8/14.
  */
-@Intercepts({@Signature(type= StatementHandler.class,method = "perpare",args = {Connection.class})})
+@Intercepts({@Signature(type= StatementHandler.class,method = "prepare",args = {Connection.class})})
 public class PaginationStatementHandlerInterceptor implements Interceptor{
     private final static Logger logger = LoggerFactory.getLogger(PaginationStatementHandlerInterceptor.class);
 

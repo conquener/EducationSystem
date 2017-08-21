@@ -247,8 +247,8 @@
   <select id="authentication" resultMap="BaseResultMap" parameterType="map">
     select
     <include refid="Base_Column_List" />
-    from user
-    where user_name = #{record.userName,jdbcType=VARCHAR} and user_pwd = #{record.userPwd,jdbcType=CHAR}
+    from EduSystemDatabase..T_AU_USER
+    where USER_NAME = #{record.userName,jdbcType=VARCHAR} and USER_PWD = #{record.userPwd,jdbcType=VARCHAR}
   </select>
 
   <!-- 分页条件查询 -->
@@ -258,7 +258,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from EduSystemDatabase..T_AU_USER
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

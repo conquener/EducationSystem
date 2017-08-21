@@ -149,6 +149,26 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
+  <select id="selectRoleByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM
+    EduSystemDatabase..T_AU_ROLE
+    WHERE ID in (
+      SELECT ROLEID FROM EduSystemDatabase..T_AU_USER_ROLE WHERE USERID = #{userId,jdbcType = NUMERIC}
+    )
+  </select>
+
+
+
+
+
+
+
+
+  <!--   update  -->
+
   <update id="updateByExampleSelective" parameterType="map" >
     update EduSystemDatabase..T_AU_ROLE
     <set >
@@ -209,4 +229,6 @@
       VALID = #{valid,jdbcType=INTEGER}
     where ID = #{id,jdbcType=NUMERIC}
   </update>
+
+
 </mapper>

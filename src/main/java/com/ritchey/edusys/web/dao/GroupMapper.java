@@ -27,4 +27,6 @@ public interface GroupMapper {
     int updateByPrimaryKeySelective(Group record);
 
     int updateByPrimaryKey(Group record);
+
+    List<Group> selectGroupByUserId(Long userId);
 }

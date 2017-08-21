@@ -1,5 +1,6 @@
 package com.ritchey.edusys.web.dao;
 
+import com.ritchey.edusys.web.model.Role;
 import com.ritchey.edusys.web.model.UserRoleRelation;
 import com.ritchey.edusys.web.model.UserRoleRelationExample;
 import java.util.List;
@@ -27,4 +28,5 @@ public interface UserRoleRelationMapper {
     int updateByPrimaryKeySelective(UserRoleRelation record);
 
     int updateByPrimaryKey(UserRoleRelation record);
+
 }

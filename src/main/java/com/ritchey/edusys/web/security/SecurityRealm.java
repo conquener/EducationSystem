@@ -62,9 +62,9 @@ public class SecurityRealm extends AuthorizingRealm{
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         OverSimpleAuthorizationInfo authorizationInfo = new OverSimpleAuthorizationInfo();
         String username = String.valueOf(principalCollection.getPrimaryPrincipal());
-        final Users user = userRelationService.selectUserByUserName(username);
-        final List<Role> roles = userRelationService.selectRoleByUserId(user.getId());
-        final List<Group> groups = userRelationService.selectGroupByUserId(user.getId());
+        Users user = userRelationService.selectUserByUserName(username);
+        List<Role> roles = userRelationService.selectRoleByUserId(user.getId());
+        List<Group> groups = userRelationService.selectGroupByUserId(user.getId());
         List<Long> roleIds = new ArrayList<Long>();
         List<Long> groupIds = new ArrayList<Long>();
         for (Role role : roles) {
@@ -83,7 +83,8 @@ public class SecurityRealm extends AuthorizingRealm{
             // 添加权限
             authorizationInfo.addStringPermission(permission.getPermissionSign());
         }
-
+        authorizationInfo.addRole("Super_User");
+        authorizationInfo.addStringPermission("Admin");
         return authorizationInfo;
     }
 }

@@ -4,7 +4,9 @@ import com.ritchey.edusys.web.model.Role;
 import com.ritchey.edusys.web.model.RoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RoleMapper {
     int countByExample(RoleExample example);
 
@@ -27,4 +29,6 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    List<Role> selectRoleByUserId(Long userId);
 }

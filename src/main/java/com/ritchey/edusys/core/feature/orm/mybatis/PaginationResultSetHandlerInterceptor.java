@@ -32,7 +32,7 @@ public class PaginationResultSetHandlerInterceptor implements Interceptor{
             metaStatementHandler.setValue("rowBounds.result", result);
         }
 
-        return null;
+        return result;
     }
 
     @Override
