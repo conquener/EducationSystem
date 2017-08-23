@@ -24,22 +24,22 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <meta name="MobileOptimized" content="320">
 
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
         <!-- END GLOBAL MANDATORY STYLES -->
 
         <!-- BEGIN THEME STYLES -->
-        <link href="assets/css/style-metronic.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/css/style-metronic.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/css/style-responsive.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/css/pages/tasks.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="${basePath}/assets/css/custom.css" rel="stylesheet" type="text/css" />
         <!-- END THEME STYLES -->
 
-        <link rel="shortcut icon" href="app/img/favicon.ico" />
+        <link rel="shortcut icon" href="${basePath}/app/img/favicon.ico" />
     </head>
     <!-- END HEAD -->
 
@@ -64,7 +64,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown user">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <img alt="" src="assets/img/avatar1_small.jpg"/>
+                            <img alt="头像" src="assets/img/avatar1_small.jpg"/>
                             <span class="username"> ${userInfo.userName } </span>
                             <i class="fa fa-angle-down"></i>
                         </a>
@@ -120,21 +120,34 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 class="arrow "> </span>
                             </a>
                             <ul class="sub-menu">
-                                <li>
-                                    <a href="javascript:;">
-                                        用户管理
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        角色管理
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        权限管理
-                                    </a>
-                                </li>
+                                <shiro:hasAnyRoles name="Super_User,Admin,IT">
+                                    <li>
+                                        <a href="rest/page/userInfo">
+                                            用户管理
+                                        </a>
+                                    </li>
+                                </shiro:hasAnyRoles>
+                                <shiro:hasAnyRoles name="Super_User,Admin,IT">
+                                    <li>
+                                        <a href="rest/page/roleInfo">
+                                            角色管理
+                                        </a>
+                                    </li>
+                                </shiro:hasAnyRoles>
+                                <shiro:hasAnyRoles name="Super_User,Admin,IT">
+                                    <li>
+                                        <a href="rest/page/groupInfo">
+                                            Group管理
+                                        </a>
+                                    </li>
+                                </shiro:hasAnyRoles>
+                                <shiro:hasAnyRoles name="Super_User,Admin">
+                                    <li>
+                                        <a href="rest/page/permissionInfo">
+                                            权限管理
+                                        </a>
+                                    </li>
+                                </shiro:hasAnyRoles>
                             </ul>
                         </li>
 
@@ -154,25 +167,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                         密码修改
                                     </a>
                                 </li>
-                                <!--test shiro controll -->
-                                <shiro:hasAnyRoles name="Super_User">
-                                    <li>
-                                        <a href="javascript:;">super_admin Role</a>
-                                    </li>
-                                </shiro:hasAnyRoles>
-                                
-                                <shiro:hasPermission name="user:create">
-                                    <li>
-                                        <a href="javascript:;">user:create Role</a>
-                                    </li>
-                                </shiro:hasPermission>
-                                
-                                <shiro:hasPermission name="user:update">
-                                    <li>
-                                        <a href="javascript:;">user:update Role</a>
-                                    </li>
-                                </shiro:hasPermission>--%>
-     
                             </ul>
                         </li>
 
@@ -263,31 +257,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </div>
                         </div>
                     </div>
-                    <!-- END STYLE CUSTOMIZER -->
-
-                    <!-- BEGIN PAGE HEADER-->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                            <h3 class="page-title" id="index-page-title">Dashboard</h3>
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <i class="fa fa-home"></i>
-                                    <a href="javascript:;">
-                                        首页
-                                    </a>
-                                    <i class="fa fa-angle-right"></i>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        Dashboard
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- END PAGE TITLE & BREADCRUMB-->
-                        </div>
-                    </div>
-                    <!-- END PAGE HEADER-->
 
                     <!-- BEGIN DASHBOARD STATS -->
                     <div id="main-content"></div>
@@ -308,23 +277,23 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
             </div>
         </div>
         <!--[if lt IE 9]>
-        <script src="assets/plugins/respond.min.js"></script>
-        <script src="assets/plugins/excanvas.min.js"></script>
+        <script src="${basePath}/assets/plugins/respond.min.js"></script>
+        <script src="${basePath}/assets/plugins/excanvas.min.js"></script>
         <![endif]-->
-        <script src="assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 
-        <script src="assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
-        <script type="text/javascript" src="assets/plugins/select2/select2.min.js"></script>
+        <script src="${basePath}/assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
+        <script type="${basePath}/text/javascript" src="assets/plugins/select2/select2.min.js"></script>
 
-        <script src="assets/scripts/app.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/scripts/app.js" type="text/javascript"></script>
         <script type="text/javascript" src="app/js/index.js"></script>
 
         <!-- <script data-main="app/js/main" src="app/lib/requirejs/require.js"></script> -->
