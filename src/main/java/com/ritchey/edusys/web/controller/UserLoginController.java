@@ -3,6 +3,7 @@ package com.ritchey.edusys.web.controller;
 import com.ritchey.edusys.web.model.Users;
 import com.ritchey.edusys.web.service.IUserRelationService;
 import com.sun.org.apache.regexp.internal.RE;
+import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -22,6 +24,7 @@ import javax.validation.Valid;
  * Created by Administrator on 2017/8/16.
  */
 @Controller
+@EnableSwagger2
 @RequestMapping(value =  "/user")
 public class UserLoginController {
     private static final Logger log = Logger.getLogger(UserLoginController.class);
@@ -32,11 +35,12 @@ public class UserLoginController {
      * 用户登录
      */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @ApiOperation(value = "用户登录",notes = "用户登录验证")
     public String login(@Valid Users user, BindingResult result, Model model, HttpServletRequest request){
         try {
             Subject subject = SecurityUtils.getSubject();
             if(subject.isAuthenticated()){
-                return "redirect:/";
+                return "index";
             }
             if (result.hasErrors()) {
                 model.addAttribute("error", "参数错误！");

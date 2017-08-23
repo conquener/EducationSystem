@@ -16,6 +16,7 @@
     <context:component-scan base-package="com.ritchey.edusys.web.controller"/>
     <!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的 -->
 
+    <mvc:default-servlet-handler />
 
     <!-- 指定自己定义的validator -->
     <mvc:annotation-driven validator="validator"/>
@@ -57,6 +58,8 @@
             </list>
         </property>
     </bean>
+
+
     <bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
         <property name="supportedMediaTypes">
@@ -67,6 +70,7 @@
         </property>
     </bean>
 
+    
     <!-- 对模型视图添加前后缀 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/view/" p:suffix=".jsp"/>
@@ -84,5 +88,8 @@
         <property name="securityManager" ref="securityManager"/>
     </bean>
 
+    <!-- 对Swagger 不拦截 -->
+    <mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/"/>
+    <mvc:resources  mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
 
 </beans>

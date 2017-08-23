@@ -20,8 +20,10 @@
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util.xsd">
 
-<!-- 扫描包下内容 -->
+    <!-- 扫描包下内容 -->
     <context:component-scan base-package="com.ritchey.edusys.*"/>
+    <!-- 扫描swagger  -->
+    <context:component-scan base-package="springfox.*"/>
 
     <bean id="propertyConfiguer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -109,5 +111,13 @@
           p:configLocation="classpath:ehcache.xml"/>
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
           p:cacheManager-ref="ehCacheManagerFactory"/>
+
+    <!-- Swagger配置 -->
+    <!-- spring 容器加载 swagger 1 config -->
+<!--    <bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig"/>-->
+
+    <!--  spring 加载自定义的swagger 1 config配置 -->
+    <bean class="com.ritchey.edusys.core.util.swaager.UserDefSwaggerConfig"/>
+
 
 </beans>
