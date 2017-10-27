@@ -3,7 +3,11 @@ package com.ritchey.edusys.core.feature.orm.dialect;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author  Ritchey Huang
+ */
 public class MSPageHepler {
+    public static final String SQL_SELETE_DISTINCT = "select distinct";
     /**
      * 得到查询总数的sql
      */
@@ -16,7 +20,7 @@ public class MSPageHepler {
         String select = querySelect.substring(0, formIndex);
 
         // 如果SELECT 中包含 DISTINCT 只能在外层包含COUNT
-        if (select.toLowerCase().indexOf("select distinct") != -1 || querySelect.toLowerCase().indexOf("group by") != -1) {
+        if (select.toLowerCase().indexOf(SQL_SELETE_DISTINCT) != -1 || querySelect.toLowerCase().indexOf("group by") != -1) {
             return new StringBuffer(querySelect.length()).append("select count(1) count from (").append(querySelect.substring(0, orderIndex)).append(" ) t").toString();
         } else {
             return new StringBuffer(querySelect.length()).append("select count(1) count ").append(querySelect.substring(formIndex, orderIndex)).toString();

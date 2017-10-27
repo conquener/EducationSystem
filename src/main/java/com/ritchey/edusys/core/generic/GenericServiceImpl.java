@@ -18,6 +18,7 @@ public abstract class GenericServiceImpl<Model, PK>  implements  GenericService<
      *
      * @param model 对象
      */
+    @Override
     public int insert(Model model) {
         return getDao().insertSelective(model);
     }
@@ -27,6 +28,7 @@ public abstract class GenericServiceImpl<Model, PK>  implements  GenericService<
      *
      * @param model 对象
      */
+    @Override
     public int update(Model model) {
         return getDao().updateByPrimaryKeySelective(model);
     }
@@ -46,6 +48,7 @@ public abstract class GenericServiceImpl<Model, PK>  implements  GenericService<
      * @param id 主键
      * @return
      */
+    @Override
     public Model selectById(PK id) {
         return getDao().selectByPrimaryKey(id);
     }

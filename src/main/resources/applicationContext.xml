@@ -109,6 +109,7 @@
     <cache:annotation-driven cache-manager="cacheManager"/>
     <bean id="ehCacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
           p:configLocation="classpath:ehcache.xml"/>
+
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
           p:cacheManager-ref="ehCacheManagerFactory"/>
 
@@ -118,6 +119,5 @@
 
     <!--  spring 加载自定义的swagger 1 config配置 -->
     <bean class="com.ritchey.edusys.core.util.swaager.UserDefSwaggerConfig"/>
-
 
 </beans>

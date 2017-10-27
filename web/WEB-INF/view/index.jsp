@@ -40,6 +40,16 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <!-- END THEME STYLES -->
 
         <link rel="shortcut icon" href="${basePath}/app/img/favicon.ico" />
+
+        <style>
+            #userinfo_bg {
+                background-image: url(${basePath}/assets/img/bg/user_info_repeat_bg.jpg);
+                background-color: #ecf5fb;
+                background-position: left top;
+                background-repeat: repeat;
+                padding: 15px;
+            }
+        </style>
     </head>
     <!-- END HEAD -->
 
@@ -80,7 +90,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </li>
                             <li>
-                                <a href="rest/user/logout">
+                                <a href="rest/user/loginOut">
                                     <i class="fa fa-key"></i> 退出
                                 </a>
                             </li>
@@ -169,19 +179,18 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </li>
                             </ul>
                         </li>
-
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>
             </div>
             <!-- END SIDEBAR -->
             <!-- BEGIN CONTENT -->
-            <div class="page-content-wrapper">
-                <div class="page-content">
+            <div class="page-content-wrapper" >
+                <div class="page-content" id="userinfo_bg">
                     <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
                     <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
+                        <div class="modal-dialog" >
+                            <div class="modal-content" >
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                     <h4 class="modal-title">Modal title</h4>
@@ -257,7 +266,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </div>
                         </div>
                     </div>
-
                     <!-- BEGIN DASHBOARD STATS -->
                     <div id="main-content"></div>
 

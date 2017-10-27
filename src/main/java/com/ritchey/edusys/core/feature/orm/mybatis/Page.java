@@ -100,10 +100,11 @@ public class Page<T> extends RowBounds {
     /**
      * 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从0开始.
      */
+    @Override
     public int getOffset() {
         return offset;
     }
-
+    @Override
     public int getLimit() {
         return limit;
     }

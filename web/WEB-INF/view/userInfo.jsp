@@ -25,6 +25,82 @@
                 </a>
             </li>
         </ul>
+
+        <!-- 查询用表单-->
+        <form class="form-horizontal" role="form" action="rest/userManage/userquery">
+            <div class="form-group">
+                <div class="table-row-cell">
+                    <label for="username" class="col-sm-1 control-label">名称：</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="请输入名称">
+                    </div>
+                    <label for="userAge" class="col-sm-1 control-label">年龄：</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="userAge" id="userAge" placeholder="请输入年龄">
+
+                    </div>
+
+                </div>
+                <button id="fat-btn" class="btn btn-primary" data-loading-text="Loading..."
+                        type="submit" > 查询
+                </button>
+            </div>
+
+        </form>
+
         <!-- END PAGE TITLE & BREADCRUMB-->
+        <table class="table table-bordered">
+            <caption>用户信息列表</caption>
+            <thead>
+                <tr>
+                    <th>title1</th>
+                    <th>title2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>tbody1</td>
+                    <td>tbody2</td>
+                </tr>
+                <tr>
+                    <td>tbody1</td>
+                    <td>tbody2</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+<script language="JavaScript" type="text/javascript">
+    $(function(){
+        $('form').bootstrapValidator({
+            message:'This value is not valid',
+            feedbackIcons:{
+                valid:'glyphicon glyphicon-ok',
+                invalid:'glyphicon glyphicon-remove',
+                validating:'glyphicon glyphicon-refresh'
+            },
+            fields:{
+                username:{
+                    message:'用户名验证失败',
+                    validators:{
+                        notEmpty:{
+                            message:'用户名不能为空!',
+                        }
+                    }
+                },
+                age:{
+                    message:'用户年龄验证失败',
+                    validators:{
+                        notEmpty:{
+                            message:'用户年龄不能为空!',
+                        }
+                    }
+                }
+
+            }
+
+        });
+    });
+
+
+</script>

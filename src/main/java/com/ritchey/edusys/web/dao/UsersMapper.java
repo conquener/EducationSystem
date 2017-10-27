@@ -48,4 +48,11 @@ public interface UsersMapper {
      * @return
      */
     List<Users> selectByExampleAndPage(Page<Users> page, UsersExample example);
+
+
+    /**
+     * 查询User 信息
+     */
+
+
 }
