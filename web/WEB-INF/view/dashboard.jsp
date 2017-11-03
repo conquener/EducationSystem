@@ -41,7 +41,7 @@
                 <i class="fa fa-shopping-cart"></i>
             </div>
             <div class="details">
-                <div class="number">549</div>
+                <div class="number">教师管理</div>
             </div>
             <a class="more" href="#"> View more <i class="m-icon-swapright m-icon-white"></i>
             </a>
@@ -53,7 +53,7 @@
                 <i class="fa fa-globe"></i>
             </div>
             <div class="details">
-                <div class="number">89</div>
+                <div class="number">学生管理</div>
             </div>
             <a class="more" href="#"> View more <i class="m-icon-swapright m-icon-white"></i>
             </a>
@@ -65,7 +65,7 @@
                 <i class="fa fa-bar-chart-o"></i>
             </div>
             <div class="details">
-                <div class="number">12</div>
+                <div class="number">政务处理</div>
             </div>
             <a class="more" href="#"> View more <i class="m-icon-swapright m-icon-white"></i>
             </a>

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @
  * Created by Administrator on 2017/8/18.
  */
 @Service
@@ -62,21 +63,40 @@ public class UserRelationServiceImpl implements  IUserRelationService{
         return user;
     }
 
-    public List<Users> selectUsersList(Map<String,Object> paramMap){
+    @Override
+    public Page<Users> selectUsersList(Map<String,Object> paramMap,Page<Users> page){
         List<Users> users = new ArrayList<Users>();
         try {
-          /* users  =   userMapper.selectUsersList(paramMap);*/
-            Page<Users> page = new Page<Users>();
             UsersExample ue = new UsersExample();
             UsersExample.Criteria criteria = ue.createCriteria();
-            if(paramMap.get("username")!=null && paramMap.get("username").toString().equals("")){
+            if(paramMap.get("username")!=null && !paramMap.get("username").toString().equals("")){
                 criteria.andUserNameEqualTo(paramMap.get("username").toString());
             }
             users  =  userMapper.selectByExampleAndPage(page,ue);
+            page.setResult(users);
         }catch(Exception e){
             e.printStackTrace();
         }
 
-        return users;
+        return page;
+    }
+
+
+    @Override
+    public Page<Role> selectRolesList(Map<String, Object> paramMap, Page<Role> page) {
+        List<Role> roles = new ArrayList<Role>();
+        try {
+            RoleExample re = new RoleExample();
+            RoleExample.Criteria criteria = re.createCriteria();
+            if(paramMap.get("roleName")!=null && !paramMap.get("roleName").toString().equals("")){
+                criteria.andRoleNameEqualTo(paramMap.get("roleName").toString());
+            }
+            roles  =  roleMapper.selectByExampleAndPage(page,re);
+            page.setResult(roles);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return page;
     }
 }

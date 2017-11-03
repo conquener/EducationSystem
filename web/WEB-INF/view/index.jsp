@@ -132,14 +132,14 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <ul class="sub-menu">
                                 <shiro:hasAnyRoles name="Super_User,Admin,IT">
                                     <li>
-                                        <a href="rest/page/userInfo">
+                                        <a id="userInfoLink" href="rest/urpManage/userquery">
                                             用户管理
                                         </a>
                                     </li>
                                 </shiro:hasAnyRoles>
                                 <shiro:hasAnyRoles name="Super_User,Admin,IT">
                                     <li>
-                                        <a href="rest/page/roleInfo">
+                                        <a id="roleInfoLink" href="rest/urpManage/roleInfo">
                                             角色管理
                                         </a>
                                     </li>
@@ -303,6 +303,22 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
         <script src="${basePath}/assets/scripts/app.js" type="text/javascript"></script>
         <script type="text/javascript" src="app/js/index.js"></script>
+        <script type="text/javascript">
+            function submitForm(formId,linkId){
+                debugger;
+                var  form = $('#'+linkId).serialize();
+                var a = $("#"+formId);
+                var href ;
+                if(a.attr('href').indexOf('?')>0){
+                    href= a.attr('href').substring(0,a.attr('href').indexOf('?'));
+                }else{
+                    href= a.attr('href');
+                }
+                a.attr('href',href+'?'+form);
+                document.getElementById(formId).click();
+            }
+        </script>
+
 
         <!-- <script data-main="app/js/main" src="app/lib/requirejs/require.js"></script> -->
     </body>

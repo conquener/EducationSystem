@@ -23,8 +23,9 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
- * Created by Administrator on 2017/8/16.
+ * 用户登录相关
  * @author Ritchey huang
+ * Created by Administrator on 2017/8/16.
  */
 @Controller
 @EnableSwagger2

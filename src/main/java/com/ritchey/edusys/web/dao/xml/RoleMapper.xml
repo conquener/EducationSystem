@@ -160,6 +160,22 @@
     )
   </select>
 
+  <!-- 分页条件查询 -->
+  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.ritchey.edusys.web.model.Role">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from EduSystemDatabase..T_AU_ROLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
 
 
 

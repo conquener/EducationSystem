@@ -465,6 +465,7 @@ Dropdown Menu
   z-index: 1000;
   display: none;
   float: left;
+  min-width: 100%;
   list-style: none;
   text-shadow: none;
   padding: 0px;

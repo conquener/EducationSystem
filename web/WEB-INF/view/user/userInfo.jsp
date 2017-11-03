@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -27,50 +29,64 @@
         </ul>
 
         <!-- 查询用表单-->
-        <form class="form-horizontal" role="form" action="rest/userManage/userquery">
+        <form class="form-horizontal" id="userInfoForm"  role="form" action="rest/urpManage/userquery"  method="post" >
+            <input id="indexPage" name="indexPage" value="${indexPage}" type="hidden" />
+            <input id="pageSize" name="pageSize" value="${pageSize}"  type="hidden" />
             <div class="form-group">
                 <div class="table-row-cell">
                     <label for="username" class="col-sm-1 control-label">名称：</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="username" id="username" placeholder="请输入名称">
+                        <input type="text" class="form-control" value="${username}" name="username" id="username" placeholder="请输入名称">
                     </div>
                     <label for="userAge" class="col-sm-1 control-label">年龄：</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" name="userAge" id="userAge" placeholder="请输入年龄">
-
                     </div>
-
                 </div>
                 <button id="fat-btn" class="btn btn-primary" data-loading-text="Loading..."
-                        type="submit" > 查询
+                        type="button" onclick="submitForm()" > 查询
                 </button>
             </div>
 
         </form>
 
         <!-- END PAGE TITLE & BREADCRUMB-->
-        <table class="table table-bordered">
+        <table id="tale_data" class="table table-bordered">
             <caption>用户信息列表</caption>
-            <thead>
-                <tr>
-                    <th>title1</th>
-                    <th>title2</th>
-                </tr>
-            </thead>
+
+                    <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>创建时间</th>
+                            <th>最后登录时间</th>
+
+                        </tr>
+                    </thead>
+
+
             <tbody>
-                <tr>
-                    <td>tbody1</td>
-                    <td>tbody2</td>
-                </tr>
-                <tr>
-                    <td>tbody1</td>
-                    <td>tbody2</td>
-                </tr>
+                <c:if test="${!empty page}" >
+                    <c:forEach items="${page.result}" var="item" varStatus="status" >
+                        <tr>
+                            <td>${item.userName}</td>
+                            <td>${item.createTime}</td>
+                            <td>${endLoginTime}</td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
             </tbody>
         </table>
+        <%@include file="../include/pageIndex.jsp"%>
     </div>
 </div>
 <script language="JavaScript" type="text/javascript">
+    function submitOf(){
+        var linkId = "userInfoLink";
+        var formId = "userInfoForm";
+        submitForm(linkId,formId);
+    }
+
+
     $(function(){
         $('form').bootstrapValidator({
             message:'This value is not valid',

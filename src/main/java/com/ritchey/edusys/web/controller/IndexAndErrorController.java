@@ -1,18 +1,31 @@
 package com.ritchey.edusys.web.controller;
 
+import com.ritchey.edusys.core.feature.orm.mybatis.Page;
+import com.ritchey.edusys.web.model.Role;
+import com.ritchey.edusys.web.model.Users;
+import com.ritchey.edusys.web.service.IUserRelationService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
+ * @author Ritchey Huang
  * Created by Administrator on 2017/8/17.
  */
 @Controller
 @EnableSwagger2
 @RequestMapping(value = "/page")
 public class IndexAndErrorController {
-
+    @Autowired
+    private IUserRelationService userRelationService;
     /**
      * 登录页
      */
@@ -29,26 +42,6 @@ public class IndexAndErrorController {
     @ApiOperation(value = "首页",notes = "进入首页")
     public String dashboard() {
         return "dashboard";
-    }
-
-    /**
-     * 用户信息
-     * @return
-     */
-    @RequestMapping("/userInfo")
-    @ApiOperation(value = "查询/修改用户信息",notes = "进入用户信息界面，查询或者修改用户信息")
-    public  String userInfo(){
-        return "userInfo";
-    }
-
-    /**
-     * 角色信息
-     * @return
-     */
-    @RequestMapping("/roleInfo")
-    @ApiOperation(value = "查询/修改角色信息",notes = "进入角色信息界面，查询或者修改角色信息")
-    public  String roleInfo(){
-        return "roleInfo";
     }
 
     /**
