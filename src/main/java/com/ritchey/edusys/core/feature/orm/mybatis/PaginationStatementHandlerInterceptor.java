@@ -88,7 +88,6 @@ public class PaginationStatementHandlerInterceptor implements Interceptor{
         // MetaObject.forObject(parameterHandler);
         // Object parameterObject =
         // metaStatementHandler.getValue("parameterObject");
-        // TODO 缓存具有相同SQL语句和参数的总数
         PreparedStatement prepareStatement = connection.prepareStatement(countSql);
         parameterHandler.setParameters(prepareStatement);
         ResultSet rs = prepareStatement.executeQuery();

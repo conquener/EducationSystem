@@ -41,7 +41,7 @@
 
                 </div>
                 <button id="fat-btn" class="btn btn-primary" data-loading-text="Loading..."
-                        type="button" onclick="" > 查询
+                        type="button" onclick="submitOf()" > 查询
                 </button>
             </div>
 

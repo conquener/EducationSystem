@@ -42,9 +42,10 @@
                     <div class="col-sm-2">
                         <input type="text" class="form-control" name="userAge" id="userAge" placeholder="请输入年龄">
                     </div>
+
                 </div>
                 <button id="fat-btn" class="btn btn-primary" data-loading-text="Loading..."
-                        type="button" onclick="submitForm()" > 查询
+                        type="button" onclick="submitOf()" > 查询
                 </button>
             </div>
 
@@ -59,7 +60,7 @@
                             <th>用户名</th>
                             <th>创建时间</th>
                             <th>最后登录时间</th>
-
+                            <th>用户档案</th>
                         </tr>
                     </thead>
 
@@ -71,6 +72,7 @@
                             <td>${item.userName}</td>
                             <td>${item.createTime}</td>
                             <td>${endLoginTime}</td>
+                            <td>----</td>
                         </tr>
                     </c:forEach>
                 </c:if>

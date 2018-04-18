@@ -26,6 +26,8 @@ public class UserRelationServiceImpl implements  IUserRelationService{
     private RoleMapper roleMapper;
     @Autowired
     private GroupMapper groupMapper;
+    public static final String USERNAME = "username";
+    public static final String ROLENAME = "roleName";
 
     @Override
     public List<Group> selectGroupByUserId(Long userId) {
@@ -69,8 +71,8 @@ public class UserRelationServiceImpl implements  IUserRelationService{
         try {
             UsersExample ue = new UsersExample();
             UsersExample.Criteria criteria = ue.createCriteria();
-            if(paramMap.get("username")!=null && !paramMap.get("username").toString().equals("")){
-                criteria.andUserNameEqualTo(paramMap.get("username").toString());
+            if(paramMap.get(USERNAME)!=null && !"".equals(paramMap.get(USERNAME).toString().trim())){
+                criteria.andUserNameEqualTo(paramMap.get(USERNAME).toString());
             }
             users  =  userMapper.selectByExampleAndPage(page,ue);
             page.setResult(users);
@@ -88,8 +90,8 @@ public class UserRelationServiceImpl implements  IUserRelationService{
         try {
             RoleExample re = new RoleExample();
             RoleExample.Criteria criteria = re.createCriteria();
-            if(paramMap.get("roleName")!=null && !paramMap.get("roleName").toString().equals("")){
-                criteria.andRoleNameEqualTo(paramMap.get("roleName").toString());
+            if(paramMap.get(ROLENAME)!=null && !"".equals(paramMap.get(ROLENAME).toString().trim())){
+                criteria.andRoleNameEqualTo(paramMap.get(ROLENAME).toString());
             }
             roles  =  roleMapper.selectByExampleAndPage(page,re);
             page.setResult(roles);

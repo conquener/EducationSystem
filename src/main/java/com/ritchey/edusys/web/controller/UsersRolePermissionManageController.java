@@ -9,9 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +47,7 @@ public class UsersRolePermissionManageController {
 
         Map<String,Object> paramMap = new HashMap<String,Object>();
 
-        if(username!=null && !username.equals("")){
+        if(username!=null && !"".equals(username.trim())){
             paramMap.put("username",username);
         }
         if(userAge!=null){
@@ -69,12 +74,12 @@ public class UsersRolePermissionManageController {
             indexPage = 1;
         }
         if (pageSize == null || pageSize == 0){
-            pageSize = 1;
+            pageSize = 15;
         }
 
         Map<String,Object> paramMap = new HashMap<String,Object>();
 
-        if(roleName!=null && !roleName.equals("")){
+        if(roleName!=null && !"".equals(roleName.trim())){
             paramMap.put("roleName",roleName);
         }
         Page<Role> page = new Page<Role>(indexPage,pageSize);
@@ -83,6 +88,31 @@ public class UsersRolePermissionManageController {
         request.setAttribute("indexPage",indexPage);
         request.setAttribute("pageSize",pageSize);
         return "role/roleInfo";
+    }
+
+    /**
+     * 修改个人信息
+     * @return
+     */
+    @RequestMapping(value = "/modifyUserInfo",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    @ApiOperation(value = "查询/修改个人信息",notes = "进入权限信息界面，查询或者修改个人信息")
+    public  String modifyUserInfo(@RequestParam("fileId")MultipartFile file,HttpServletRequest request){
+        return "modifyUserInfo";
+    }
+
+    /**
+     *
+     */
+    @RequestMapping(value = "/uploadUserInfoFile" ,produces = "text/html;charset=utf-8" )
+    @ResponseBody
+    @ApiOperation(value = "上传个人信息档案",notes = "上传个人信息档案")
+    public  String uploadUserInfoFile(@RequestParam("fileId")MultipartFile file,HttpServletRequest request)
+        throws IOException{
+        InputStream fileInput = fileInput = file.getInputStream() ;
+        String name = file.getOriginalFilename();
+        fileInput.close();
+        return "上传成功："+name;
     }
 
 }

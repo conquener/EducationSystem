@@ -168,7 +168,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="rest/page/gotoModifyUserInfo">
                                         信息修改
                                     </a>
                                 </li>
@@ -306,15 +306,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <script type="text/javascript">
             function submitForm(formId,linkId){
                 debugger;
-                var  form = $('#'+linkId).serialize();
-                var a = $("#"+formId);
+                var  form = $('#'+formId);
+
                 var href ;
-                if(a.attr('href').indexOf('?')>0){
-                    href= a.attr('href').substring(0,a.attr('href').indexOf('?'));
+                if(form.attr('action').indexOf('?')>0){
+                    href= form.attr('action').substring(0,form.attr('action').indexOf('?'));
                 }else{
-                    href= a.attr('href');
+                    href= form.attr('action');
                 }
-                a.attr('href',href+'?'+form);
+                form.attr('action',href+'?'+form.serialize());
                 document.getElementById(formId).click();
             }
         </script>

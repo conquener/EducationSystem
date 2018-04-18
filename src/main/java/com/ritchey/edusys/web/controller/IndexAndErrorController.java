@@ -64,6 +64,16 @@ public class IndexAndErrorController {
         return "permissionInfo";
     }
 
+    /**
+     * 进入个人信息修改界面
+     * @return
+     */
+    @RequestMapping("/gotoModifyUserInfo")
+    @ApiOperation(value = "查询/修改个人信息",notes = "进入权限信息界面，查询或者修改个人信息")
+    public  String gotModifyUserInfo(){
+        return "modifyUserInfo";
+    }
+
 
     /**
      * 404页

@@ -44,7 +44,6 @@ public abstract class GenericServiceImpl<Model, PK>  implements  GenericService<
 
     /**
      * 通过主键, 查询对象
-     *
      * @param id 主键
      * @return
      */
