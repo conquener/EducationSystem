@@ -37,6 +37,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <link href="${basePath}/assets/css/pages/tasks.css" rel="stylesheet" type="text/css" />
         <link href="${basePath}/assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="${basePath}/assets/css/custom.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/plugins/bootstrap-fileInput/css/fileinput.css" rel="stylesheet" type="text/css" />
+        <link href="${basePath}/assets/plugins/bootstrap-fileInput/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
+        <link href="${basePath}/assets/plugins/bootstrapValidator/bootstrapValidator.css"/>
         <!-- END THEME STYLES -->
 
         <link rel="shortcut icon" href="${basePath}/app/img/favicon.ico" />
@@ -288,21 +291,34 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <script src="${basePath}/assets/plugins/respond.min.js"></script>
         <script src="${basePath}/assets/plugins/excanvas.min.js"></script>
         <![endif]-->
+
         <script src="${basePath}/assets/plugins/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script src="${basePath}/assets/plugins/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
         <script src="${basePath}/assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
         <script src="${basePath}/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="${basePath}/assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js"
+                type="text/javascript"></script>
         <script src="${basePath}/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <script src="${basePath}/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
         <script src="${basePath}/assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
         <script src="${basePath}/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 
         <script src="${basePath}/assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
-        <script type="${basePath}/text/javascript" src="assets/plugins/select2/select2.min.js"></script>
+        <script type="text/javascript" src="${basePath}/assets/plugins/select2/select2.min.js"></script>
 
         <script src="${basePath}/assets/scripts/app.js" type="text/javascript"></script>
-        <script type="text/javascript" src="app/js/index.js"></script>
+        <script type="text/javascript" src="${basePath}/app/js/index.js"></script>
+
+
+
+        <script src="${basePath}/assets/plugins/bootstrap-fileInput/js/fileinput.js"/>
+        <script src="${basePath}/assets/plugins/bootstrap-fileInput/js/plugins/sortable.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/bootstrap-fileInput/js/locales/fr.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/bootstrap-fileInput/js/locales/es.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/bootstrap-fileInput/themes/explorer-fa/theme.js" type="text/javascript"></script>
+        <script src="${basePath}/assets/plugins/bootstrap-fileInput/themes/fa/theme.js" type="text/javascript"></script>
+
+        <script src="assets/plugins/bootstrapValidator/bootstrapValidator.js" />
         <script type="text/javascript">
             function submitForm(formId,linkId){
                 debugger;
@@ -315,7 +331,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                     href= form.attr('action');
                 }
                 form.attr('action',href+'?'+form.serialize());
-                document.getElementById(formId).click();
+                form.submit();
             }
         </script>
 

@@ -27,50 +27,100 @@
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
         <!-- 查询用表单-->
-        <form class="form-horizontal" id="userInfoModifyForm"  role="form" action="rest/urpManage/modifyUserInfo"  method="post" >
+        <form class="form-horizontal" content="multipart/form-data"  id="userInfoModifyForm" role="form" action="rest/urpManage/modifyUserInfo"  method="post" >
             <div class="form-group">
                 <div class="table-row-cell">
                     <label for="username" class="col-sm-1 control-label">用户名：</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" value="${userInfo.userName}" name="username" id="username" placeholder="请输入名称">
+                        <input type="text" class="form-control" value="${userInfo.userName}"
+                               name="username" id="username" placeholder="请输入名称">
                     </div>
-
-                    <label for="userInfoFile" class="col-sm-1 control-label">用户档案：</label>
-                    <div class="col-sm-3">
-                        <input id="userInfoFile" name="persionDocu" value="${userInfo.persionDocu}" type="file" multiple class="fileupload">
-                    </div>
-
                 </div>
-                <div>
+             </div>
+            <div class="form-group">
+                <div class="table-row-cell">
                     <label for="userPwd" class="col-sm-1 control-label">用户密码：</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" value="${userInfo.userPwd}" name="userPwd" id="userPwd" placeholder="请输入年龄">
                     </div>
-
                 </div>
-
-                <button id="fat-btn" class="btn btn-primary" data-loading-text="Loading..."
-                        type="button" onclick="submitOf()" > 查询
-                </button>
             </div>
+            <div class="form-group">
+
+                <div class="table-row-cell">
+                    <label for="userInfoFile" class="col-sm-1 control-label">用户档案：</label>
+                    <div class="col-sm-4">
+                        <input type="file" name="userInfoFile" id="userInfoFile"  data-min-file-count="1" multiple class="file-loading" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                    <button id="fat-btn" class="btn btn-primary" data-loading-text="Loading..."
+                            type="button" onclick="submitOf()" > 查询
+                    </button>
+            </div>
+
         </form>
 
     </div>
 </div>
 <script language="JavaScript" type="text/javascript">
-   /* $("#userInfoFile").fileupload({
+    var userInfoFile = $("#userInfoFile");
+
+    //初始化上传控件
+    userInfoFile.fileinput({
         uploadUrl: "rest/urpManage/uploadUserInfoFile",
         uploadAsync: true,
-        maxFileCount: 5,
+        maxFileCount: 5,//表示允许同时上传的最大文件个数
+        //minFileCount: 0, 最小
         showBrowse: false,
-        browseOnZoneClick: true
-    });*/
+        browseOnZoneClick: true,
+        language: 'zh', //设置语言
+        //allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀  此处做ftp上传测试 ,不使用
+        showUpload: true, //是否显示上传按钮
+        showCaption: false,//是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        //dropZoneEnabled: false,//是否显示拖拽区域
+        //minImageWidth: 50, //图片的最小宽度
+        //minImageHeight: 50,//图片的最小高度
+        //maxImageWidth: 1000,//图片的最大宽度
+        //maxImageHeight: 1000,//图片的最大高度
+        //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+        enctype: 'multipart/form-data',
+        validateInitialCount:true,
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}!"
+    });
 
+    //导入文件上传完成之后的事件
+    userInfoFile.on("fileuploaded", function (event, data, previewId, index) {
+        var data = data.response.lstOrderImport;
+        debugger
+        if (data == undefined) {
+            toastr.error('文件格式类型不正确');
+            return;
+        }
+
+    });
+    //导入文件上传中的事件
+    userInfoFile.on("fileupload", function (event, data, previewId, index) {
+        var data = data.response.lstOrderImport;
+        debugger
+        if (data == undefined) {
+            toastr.error('文件格式类型不正确');
+            return;
+        }
+
+    });
+
+    //提交事件
     function submitOf(){
         debugger;
-        var linkId = "userInfoLink";
+        var linkId = "userInfoModify";
         var formId = "userInfoModifyForm";
-        submitForm(linkId,formId);
+        submitForm(formId,linkId);
     }
 
 

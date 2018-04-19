@@ -85,9 +85,8 @@
     function submitOf(){
         var linkId = "userInfoLink";
         var formId = "userInfoForm";
-        submitForm(linkId,formId);
+        submitForm(formId,linkId);
     }
-
 
     $(function(){
         $('form').bootstrapValidator({
@@ -114,9 +113,7 @@
                         }
                     }
                 }
-
             }
-
         });
     });
 

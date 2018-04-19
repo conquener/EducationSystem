@@ -20,6 +20,9 @@
             /swagger/** = anon
             <!-- 登录页允许访问 -->
             /rest/user/login = anon
+            /rest/page/401 = anon
+            /rest/page/404 = anon
+            /rest/page/500 = anon
             <!-- swagger 允许访问-->
             /rest/swagger/** =anon
             <!-- 其他资源需要认证 -->

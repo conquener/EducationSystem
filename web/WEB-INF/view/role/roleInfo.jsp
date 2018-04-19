@@ -74,7 +74,7 @@
     function submitOf(){
         var linkId = "roleInfoLink";
         var formId = "roleInfoForm";
-        submitForm(linkId,formId);
+        submitForm(formId,linkId);
     }
 
 </script>

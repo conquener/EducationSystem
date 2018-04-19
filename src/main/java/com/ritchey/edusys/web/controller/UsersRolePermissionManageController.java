@@ -1,9 +1,12 @@
 package com.ritchey.edusys.web.controller;
 
 import com.ritchey.edusys.core.feature.orm.mybatis.Page;
+import com.ritchey.edusys.core.util.Constants;
+import com.ritchey.edusys.core.util.FtpUtils;
 import com.ritchey.edusys.web.model.Role;
 import com.ritchey.edusys.web.model.Users;
 import com.ritchey.edusys.web.service.IUserRelationService;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -94,10 +97,9 @@ public class UsersRolePermissionManageController {
      * 修改个人信息
      * @return
      */
-    @RequestMapping(value = "/modifyUserInfo",produces = "text/html;charset=utf-8")
-    @ResponseBody
+    @RequestMapping(value = "/modifyUserInfo")
     @ApiOperation(value = "查询/修改个人信息",notes = "进入权限信息界面，查询或者修改个人信息")
-    public  String modifyUserInfo(@RequestParam("fileId")MultipartFile file,HttpServletRequest request){
+    public  String modifyUserInfo(HttpServletRequest request){
         return "modifyUserInfo";
     }
 
@@ -107,12 +109,37 @@ public class UsersRolePermissionManageController {
     @RequestMapping(value = "/uploadUserInfoFile" ,produces = "text/html;charset=utf-8" )
     @ResponseBody
     @ApiOperation(value = "上传个人信息档案",notes = "上传个人信息档案")
-    public  String uploadUserInfoFile(@RequestParam("fileId")MultipartFile file,HttpServletRequest request)
-        throws IOException{
-        InputStream fileInput = fileInput = file.getInputStream() ;
-        String name = file.getOriginalFilename();
+    public  String uploadUserInfoFile(@RequestParam("userInfoFile")MultipartFile file,HttpServletRequest request)
+        throws Exception{
+        String name = null;
+        String path = null;
+        String result = null;
+        InputStream fileInput  = file.getInputStream();
+        name = file.getOriginalFilename();
+        path = file.getOriginalFilename();
+
+        if (name.equals(new String(name.getBytes(Constants.UTF8),Constants.UTF8))){
+            String utf = new String(name.getBytes("utf-8"));
+            String unicode = new String(utf.getBytes(),"utf-8");
+            name = new String(unicode.getBytes(Constants.GBK));
+        }else if (name.equals(new String(name.getBytes(Constants.GBK),Constants.GBK))){
+            name = new String(name.getBytes(Constants.GBK),Constants.ISO88591);
+        }else if (!name.equals(new String(name.getBytes(Constants.ISO88591),Constants.ISO88591))){
+            throw new Exception("-----Unrecognized character encoding.-----");
+        }
+
+        FtpUtils ftpUtils = new FtpUtils();
+        if (ftpUtils.loginFtpCilent()){
+            if(ftpUtils.uploadFtp(path,name,fileInput)){
+                result =  "success";
+            }else{
+                result =  "error";
+            }
+        }else{
+            result =  "error";
+        }
         fileInput.close();
-        return "上传成功："+name;
+        return  result;
     }
 
 }

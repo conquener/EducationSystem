@@ -8,6 +8,7 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -24,7 +25,7 @@ public class FtpUtils {
 
     public static final Integer PORT = 21;
 
-    public static final String USERNAME = "ftpuser ";
+    public static final String USERNAME = "ftpuser";
 
     public static final String PASSWORD = "root1234";
 
@@ -95,6 +96,9 @@ public class FtpUtils {
      */
     public boolean uploadFtp(String remotePath, String filename, InputStream inputStream){
         boolean isFlag = false;
+        if(filename==null || "".equals(filename)){
+            return isFlag;
+        }
         try{
             //设置 二进制流的文件传输方式
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
@@ -108,7 +112,6 @@ public class FtpUtils {
                     if (onePath == null || "".equals(onePath.trim())){
                         continue;
                     }
-                    onePath = new String (onePath.getBytes("utf-8"),"iso-8859-1");
                     //改变ftp的服务器目录  如果目录不存在 则创建
                     if (!ftpClient.changeWorkingDirectory(onePath)){
                         //如果不存在 则创建服务器目录
@@ -117,9 +120,8 @@ public class FtpUtils {
                         ftpClient.changeWorkingDirectory(onePath);
                     }
                 }
-                isFlag = ftpClient.storeFile(new String(filename.getBytes("utf-8"),"iso-8859-1"),inputStream);
             }
-
+            isFlag = ftpClient.storeFile(filename,inputStream);
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -161,4 +163,16 @@ public class FtpUtils {
         return isFlag;
     }
 
+    public static void main(String[] args){
+        FtpUtils ftpUtils = new FtpUtils();
+        ftpUtils.loginFtpCilent();
+        try {
+            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Administrator\\Desktop\\11.png");
+            ftpUtils.uploadFtp("11.png","11.png",fileInputStream);
+        }catch (IOException e){
+
+        }
+
+
+    }
 }
