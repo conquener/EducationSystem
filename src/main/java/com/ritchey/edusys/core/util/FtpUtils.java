@@ -7,10 +7,7 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 
 /**
@@ -36,7 +33,7 @@ public class FtpUtils {
      */
     public boolean loginFtpCilent(){
         ftpClient = new FTPClient();
-        ftpClient.setControlEncoding("utf-8");
+        ftpClient.setControlEncoding(Constants.UTF8);
         // 划重点 主动模式 与被动模式
         //主动模式:就是指C(client)连接S(Server)的时候，告诉S，要进行通讯，数据交换。C申请开辟一个端口，专门用于两者的通信，
         //也即C端主动向S端发起的请求。
@@ -99,6 +96,23 @@ public class FtpUtils {
         if(filename==null || "".equals(filename)){
             return isFlag;
         }
+        /*try{
+        if (remotePath.equals(new String(remotePath.getBytes(Constants.ISO88591)))){
+            remotePath =  new String(remotePath.getBytes(Constants.ISO88591),Constants.UTF8);
+            filename =  new String(filename.getBytes(Constants.ISO88591),Constants.UTF8);
+        }else if (remotePath.equals(new String(remotePath.getBytes(Constants.GBK)))){
+            remotePath = new String(remotePath.getBytes(Constants.GBK),Constants.ISO88591);
+            filename = new String(filename.getBytes(Constants.GBK),Constants.ISO88591);
+        }else if (!remotePath.equals(new String(remotePath.getBytes(Constants.UTF8)))){
+            log.error("-----Unrecognized character encoding.-----");
+            return isFlag;
+        }
+        }catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+            log.error("-----Unrecognized character encoding.-----");
+            return isFlag;
+        }*/
+
         try{
             //设置 二进制流的文件传输方式
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
@@ -121,6 +135,7 @@ public class FtpUtils {
                     }
                 }
             }
+           // isFlag = ftpClient.storeFile(new String(filename.getBytes("UTF-8"),"ISO-8859-1"),inputStream);
             isFlag = ftpClient.storeFile(filename,inputStream);
         }catch(IOException e){
             e.printStackTrace();

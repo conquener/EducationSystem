@@ -27,7 +27,7 @@
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
         <!-- 查询用表单-->
-        <form class="form-horizontal" content="multipart/form-data"  id="userInfoModifyForm" role="form" action="rest/urpManage/modifyUserInfo"  method="post" >
+        <form class="form-horizontal" enctype="multipart/form-data" id="userInfoModifyForm" role="form" action="rest/urpManage/modifyUserInfo"  method="post" >
             <div class="form-group">
                 <div class="table-row-cell">
                     <label for="username" class="col-sm-1 control-label">用户名：</label>

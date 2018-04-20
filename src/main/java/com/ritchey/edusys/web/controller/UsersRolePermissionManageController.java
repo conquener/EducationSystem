@@ -118,16 +118,6 @@ public class UsersRolePermissionManageController {
         name = file.getOriginalFilename();
         path = file.getOriginalFilename();
 
-        if (name.equals(new String(name.getBytes(Constants.UTF8),Constants.UTF8))){
-            String utf = new String(name.getBytes("utf-8"));
-            String unicode = new String(utf.getBytes(),"utf-8");
-            name = new String(unicode.getBytes(Constants.GBK));
-        }else if (name.equals(new String(name.getBytes(Constants.GBK),Constants.GBK))){
-            name = new String(name.getBytes(Constants.GBK),Constants.ISO88591);
-        }else if (!name.equals(new String(name.getBytes(Constants.ISO88591),Constants.ISO88591))){
-            throw new Exception("-----Unrecognized character encoding.-----");
-        }
-
         FtpUtils ftpUtils = new FtpUtils();
         if (ftpUtils.loginFtpCilent()){
             if(ftpUtils.uploadFtp(path,name,fileInput)){
